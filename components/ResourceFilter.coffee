@@ -28,7 +28,6 @@ exports.getComponent = ->
   c.inPorts.request.on 'data', (payload) ->
     request = payload
     req = url.parse(request.url)
-    console.log req.path
     if req.path is resource
       c.outPorts.out.send request.payload
 
