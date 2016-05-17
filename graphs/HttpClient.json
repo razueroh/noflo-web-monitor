@@ -1,0 +1,171 @@
+{
+    "properties": {
+        "name": "HttpClient",
+        "environment": {
+            "type": "noflo-nodejs"
+        },
+        "sha": "fecc70a14a2aca0bb97e05cf4610affc962879e7",
+        "changed": true,
+        "project": "noflo-web-monitor",
+        "id": "noflo-web-monitor_graphs_HttpClient"
+    },
+    "inports": {
+        "url": {
+            "process": "ConfigRequest",
+            "port": "href",
+            "metadata": {
+                "x": 216,
+                "y": 144,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "method": {
+            "process": "ConfigRequest",
+            "port": "method",
+            "metadata": {
+                "x": 216,
+                "y": 252,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "data": {
+            "process": "Repeat",
+            "port": "in",
+            "metadata": {
+                "x": 216,
+                "y": 360,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "message": {
+            "process": "ReceiveResponse",
+            "port": "message",
+            "metadata": {
+                "x": 936,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "ConfigRequest": {
+            "component": "http/ConfigRequest",
+            "metadata": {
+                "label": "ConfigRequest",
+                "x": 360,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "Headers": {
+            "component": "http/Headers",
+            "metadata": {
+                "label": "Headers",
+                "x": 504,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "ReceiveResponse": {
+            "component": "http/ReceiveResponse",
+            "metadata": {
+                "label": "ReceiveResponse",
+                "x": 792,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "SendRequest": {
+            "component": "http/SendRequest",
+            "metadata": {
+                "label": "SendRequest",
+                "x": 648,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "Repeat": {
+            "component": "core/Repeat",
+            "metadata": {
+                "label": "Repeat",
+                "x": 504,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "ConfigRequest",
+                "port": "url"
+            },
+            "tgt": {
+                "process": "Headers",
+                "port": "url"
+            }
+        },
+        {
+            "src": {
+                "process": "Headers",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SendRequest",
+                "port": "url"
+            }
+        },
+        {
+            "src": {
+                "process": "SendRequest",
+                "port": "request"
+            },
+            "tgt": {
+                "process": "ReceiveResponse",
+                "port": "request"
+            }
+        },
+        {
+            "src": {
+                "process": "Repeat",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SendRequest",
+                "port": "data"
+            }
+        },
+        {
+            "src": {
+                "process": "Repeat",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SendRequest",
+                "port": "start"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "data": "{\"Content-Type\" : \"application/json\"}",
+            "tgt": {
+                "process": "Headers",
+                "port": "headers"
+            }
+        }
+    ]
+}
