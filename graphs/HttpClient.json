@@ -3,11 +3,7 @@
         "name": "HttpClient",
         "environment": {
             "type": "noflo-nodejs"
-        },
-        "sha": "fecc70a14a2aca0bb97e05cf4610affc962879e7",
-        "changed": true,
-        "project": "noflo-web-monitor",
-        "id": "noflo-web-monitor_graphs_HttpClient"
+        }
     },
     "inports": {
         "url": {
@@ -48,6 +44,16 @@
             "metadata": {
                 "x": 936,
                 "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "request": {
+            "process": "SendRequest",
+            "port": "request",
+            "metadata": {
+                "x": 936,
+                "y": 360,
                 "width": 72,
                 "height": 72
             }
