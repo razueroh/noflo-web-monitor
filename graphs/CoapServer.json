@@ -1,0 +1,133 @@
+{
+    "properties": {
+        "name": "CoapServer",
+        "project": "noflo-web-monitor",
+        "id": "noflo-web-monitor/CoapServer",
+        "environment": {
+            "type": "noflo-nodejs"
+        },
+        "changed": true,
+        "sha": "0390971b0d458efd1496a45e57123ade29b72ed9"
+    },
+    "inports": {
+        "address": {
+            "process": "CreateServer",
+            "port": "address",
+            "metadata": {
+                "x": 216,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "port": {
+            "process": "CreateServer",
+            "port": "port",
+            "metadata": {
+                "x": 216,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "type": {
+            "process": "CreateServer",
+            "port": "type",
+            "metadata": {
+                "x": 216,
+                "y": 324,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "request": {
+            "process": "ReceiveRequest",
+            "port": "request",
+            "metadata": {
+                "x": 684,
+                "y": 360,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "CreateServer": {
+            "component": "coap/CreateServer",
+            "metadata": {
+                "label": "CreateServer",
+                "x": 360,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "ReceiveRequest": {
+            "component": "coap/ReceiveRequest",
+            "metadata": {
+                "label": "ReceiveRequest",
+                "x": 504,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "SendResponse": {
+            "component": "coap/SendResponse",
+            "metadata": {
+                "label": "SendResponse",
+                "x": 684,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "ReceiveRequest",
+                "port": "response"
+            },
+            "tgt": {
+                "process": "SendResponse",
+                "port": "response"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "CreateServer",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "ReceiveRequest",
+                "port": "server"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "ReceiveRequest",
+                "port": "response"
+            },
+            "tgt": {
+                "process": "SendResponse",
+                "port": "start"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "data": "Success!",
+            "tgt": {
+                "process": "SendResponse",
+                "port": "message"
+            }
+        }
+    ]
+}
