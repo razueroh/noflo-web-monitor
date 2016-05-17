@@ -1,0 +1,131 @@
+{
+    "properties": {
+        "name": "CoapClient",
+        "environment": {
+            "type": "noflo-nodejs"
+        },
+        "sha": "9062f8c33fa51e5268ad02f4a099e51bb6952541",
+        "changed": true,
+        "project": "noflo-web-monitor",
+        "id": "noflo-web-monitor_graphs_CoapClient"
+    },
+    "inports": {
+        "coap_url": {
+            "process": "ConfigRequest",
+            "port": "href",
+            "metadata": {
+                "x": 216,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "method": {
+            "process": "ConfigRequest",
+            "port": "method",
+            "metadata": {
+                "x": 216,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "observe": {
+            "process": "ConfigRequest",
+            "port": "observe",
+            "metadata": {
+                "x": 216,
+                "y": 324,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "message": {
+            "process": "ReceiveResponse",
+            "port": "message",
+            "metadata": {
+                "x": 864,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "ConfigRequest": {
+            "component": "coap/ConfigRequest",
+            "metadata": {
+                "label": "ConfigRequest",
+                "x": 360,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "SendRequest": {
+            "component": "coap/SendRequest",
+            "metadata": {
+                "label": "SendRequest",
+                "x": 540,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "ReceiveResponse": {
+            "component": "coap/ReceiveResponse",
+            "metadata": {
+                "label": "ReceiveResponse",
+                "x": 720,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "ConfigRequest",
+                "port": "url"
+            },
+            "tgt": {
+                "process": "SendRequest",
+                "port": "url"
+            }
+        },
+        {
+            "src": {
+                "process": "ConfigRequest",
+                "port": "url"
+            },
+            "tgt": {
+                "process": "SendRequest",
+                "port": "start"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "src": {
+                "process": "SendRequest",
+                "port": "request"
+            },
+            "tgt": {
+                "process": "ReceiveResponse",
+                "port": "request"
+            }
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "ConfigRequest",
+                "port": "confirmable"
+            }
+        }
+    ]
+}
