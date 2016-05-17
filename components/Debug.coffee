@@ -32,7 +32,7 @@ exports.getComponent = ->
   c.inPorts.message.on 'data', (payload) ->
     message = payload
   c.inPorts.send.on 'data', ->
-    debug = new Date().toISOString() + ' : [' + label + ' ] - ' + message
+    debug = new Date().toISOString() + ' : [' + label + '] - ' + message
     console.log(debug)
     c.outPorts.out.send debug
 
